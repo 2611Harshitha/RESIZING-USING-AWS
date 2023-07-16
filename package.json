@@ -1,0 +1,17 @@
+{
+    "name": "s3-resizer",
+    "version": "4.0.0",
+    "dependencies": {
+        "sharp": "^0.32.0"
+    },
+    "devDependencies": {
+        "@aws-sdk/client-s3": "^3.304.0",
+        "@aws-sdk/lib-storage": "^3.304.0"
+    },
+    "scripts": {
+        "_prepare": "mkdir -p out && rm -rf out/node_modules && cp {package.json,index.js} out",
+        "create-zip": "npm run _prepare && cd out && npm i --arch=x64 --platform=linux && zip -rq s3-resizer_nodejs_18.zip index.js node_modules package.json && rm -rf package*.json index.js node_modules",
+        "create-zip-without-aws-libs": "npm run _prepare && cd out && npm i --arch=x64 --platform=linux -only=prod && zip -rq s3-resizer_nodejs_18_without_aws-sdk.zip index.js node_modules package.json && rm -rf package*.json index.js node_modules"
+    },
+    "type": "module"
+}
